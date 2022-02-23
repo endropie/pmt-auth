@@ -15,5 +15,21 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call('UsersTableSeeder');
+        $this->userGenerate();
+    }
+
+    public function userGenerate()
+    {
+        $user = \App\Models\User::firstOrNew(
+            ['id' => '1122-3344-5566-7788-9900'],
+            [
+                'name' => 'Administrator',
+                'email' => 'admin@example.com',
+                'phone' => '081234567890',
+                'password' => app('hash')->make('password'),
+            ]
+        );
+
+        $user->save();
     }
 }

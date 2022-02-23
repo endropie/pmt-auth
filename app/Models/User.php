@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use Endropie\LumenMicroServe\Auth\Concerns\AuthorizableToken;
+use Endropie\LumenMicroServe\Traits\HasFilterable;
+use Endropie\LumenMicroServe\Traits\UniqueIdentifiable;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
@@ -11,23 +14,14 @@ use Laravel\Lumen\Auth\Authorizable;
 
 class User extends Model implements AuthenticatableContract, AuthorizableContract
 {
-    use Authenticatable, Authorizable, HasFactory;
+    use Authenticatable, Authorizable, HasFactory, AuthorizableToken, HasFilterable, UniqueIdentifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var string[]
-     */
     protected $fillable = [
-        'name', 'email',
+        'name', 'email', 'phone',
     ];
 
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var string[]
-     */
     protected $hidden = [
         'password',
     ];
+    
 }
